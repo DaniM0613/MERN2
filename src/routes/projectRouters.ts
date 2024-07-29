@@ -3,6 +3,7 @@ import { ProjectController } from '../controllers/ProjectController'
 
 const router = Router()
 
-router.get('/', ProjectController.getAllProject)
+router.post('/', ProjectController.createProject)
+router.get('/', ProjectController.getAllProjects)
 
 export default router
