@@ -1,7 +1,7 @@
 import mongoose, {Schema, Document} from "mongoose";
 
-//Objesto en typescript se escriben en minuscula
-export type ProjectType = Document & {
+//Objeto en typescript se escriben en minuscula
+export interface IProject extends Document  {
     projectName: string
     clientName: string
     description: string
@@ -28,5 +28,5 @@ const ProjectSchema: Schema = new Schema({
     },
 })
 
-const Project = mongoose.model<ProjectType>('Project', ProjectSchema)
+const Project = mongoose.model<IProject>('Project', ProjectSchema)
 export default Project
