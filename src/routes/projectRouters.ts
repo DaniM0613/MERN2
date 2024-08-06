@@ -46,6 +46,11 @@ router.delete('/:id',
 /** Routes for tasks */
 router.post('/:projectId/tasks',
    validateProjectExist,
+   body('name')
+      .notEmpty().withMessage('El nombre de la tarea es obligatorio'),
+   body('description')
+      .notEmpty().withMessage('La descripcion de la tarea es obligarotia'),
+   handleInputErrors,
    TaskController.createTask
 
 )
