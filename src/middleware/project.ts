@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
-import Project, { type IProject } from '../models/Proyect'
+import Project, { IProject } from '../models/Proyect'
 
 declare global {
     namespace Express {
@@ -9,7 +9,7 @@ declare global {
     }
 }
 
-export async function ProjectExist (req: Request, res: Response, next: NextFunction ) {
+export async function projectExist(req: Request, res: Response, next: NextFunction ) {
     try {  
         const {projectId} = req.params
         const project = await Project.findById(projectId)

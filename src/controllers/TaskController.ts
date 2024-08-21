@@ -28,7 +28,6 @@ export class TaskController {
 
     static getTaskById = async (req: Request, res: Response) => {
         try {
-             
             if(req.task.project.toString() !== req.project.id){
                 const error = new Error('Accion no valida')
                 return res.status(400).json({error: error.message})
@@ -41,10 +40,6 @@ export class TaskController {
 
     static updateTask = async (req: Request, res: Response) => {
         try {
-            if(req.task.project.toString() !== req.project.id){
-                const error = new Error('Accion no valida')
-                return res.status(400).json({error: error.message})
-            }
             req.task.name = req.body.name
             req.task.description = req.body.description
             await req.task.save()
@@ -66,15 +61,9 @@ export class TaskController {
     }
     static updateStatus = async (req: Request, res: Response) => {
         try {
-            const { taskId } = req.params
-            const task = await Task.findById(taskId)
-            if(!task){
-                const error = new Error ('Tarea no encontrada')
-                return res.status(404).json({error: error.message})
-            }
             const { status } = req.body
-            task.status = status
-            await task.save()
+            req.task.status = status
+            await req.task.save()
             res.send('Tarea Actualizada')
         }catch (error){
             res.status(500).json({error: 'Hubo un error'})
